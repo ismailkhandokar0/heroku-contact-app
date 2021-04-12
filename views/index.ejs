@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+</head>
+<body>
+
+
+    <div class="container">
+        <h1 class="font-italic text-center font-weight-bolder text-dark mt-4 mb-5">Save <span class="" style="color:rgb(255, 82, 0)">Your</span> Contact</h1>
+        <div class="">
+            <form action="/" class="" method="POST" id="form">
+                <div class="row">
+                    <div class="form-group col-3">
+                        <input id="my-input" class="form-control <%= error.name ? 'is-invalid' : '' %>" type="text" name="name" placeholder="Enter name" value="<%= value.name ? value.name : ''%>" >
+                        <small class="invalid-feedback"><%= error.name %> </small>
+                    </div>
+                    <div class="form-group col-3">
+                        <input type="number" name="phone"  placeholder="Enter phone" class="form-control <%= error.phone ? 'is-invalid' : '' %> " value="<%= value.phone ? value.phone : ''%>">
+                        <small class="invalid-feedback"><%= error.phone %> </small>
+                    </div>
+                    <div class="form-group col-3">
+                        <input type="email" name="email" placeholder="Enter e-mail" class="form-control <%= error.email ? 'is-invalid':'' %> " value="<%= value.email ? value.email : ''%>">
+                        <small class="invalid-feedback"><%= error.email %> </small>
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" name="id" value="<%= value.id ? value.id : '' %>">
+                    </div>
+                    <input type="submit" value="Submit" class="btn btn-success" style="height: 37px;">
+                </div>
+            </form>
+        </div>
+        <br>
+        <br> 
+        <br>
+        <br>
+        <div class="">
+            <table class="table">
+                <thead class="table-dark">
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                </thead>
+                <tbody>
+                    
+                        
+                        <% for(let contact of contacts) { %>
+                           <tr>
+                            <td> <%= contact.name %> </td>
+                            <td> <%= contact.phone %> </td>
+                            <td> <%= contact.email %>  </td>
+                            <td>
+                                <button class="btn btn-sm btn-warning editBtn" 
+                                    data-name="<%= contact.name %>"
+                                    data-phone="<%= contact.phone %>"
+                                    data-email="<%= contact.email %>"
+                                    data-id="<%= contact.id %>"
+
+                                >
+                                    Edit
+                                </button>
+                                <a href="/delete/<%= contact.id %>" class="btn btn-sm btn-danger">Delete</a>
+                            </td>
+                           </tr>
+                        <% } %>
+
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    
+    <script>
+
+
+        let form = document.getElementById("form")
+        let editBtn = document.getElementsByClassName('editBtn')
+        ;[...editBtn].forEach(btn =>{
+            btn.addEventListener("click",function(event){
+                // console.log(event.target)
+                const {name,email,phone,id} = event.target.dataset
+                
+                form[0].value = name
+                form[1].value = phone
+                form[2].value = email 
+                form[3].value = id 
+                form[4].value = 'Update'
+            })
+        })
+
+
+    </script>
+
+</body>
+</html>
