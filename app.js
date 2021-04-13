@@ -45,7 +45,7 @@ console.log(chalk.yellow.inverse(config.get('name')))
 
 
 const PORT = process.env.PORT || 3109
-mongoose.connect(`mongodb+srv://${config.get('db-username')}:${config.get('db-password')}@cluster0.vn7sd.mongodb.net/<dbname>?retryWrites=true&w=majority`,{useNewUrlParser:true})
+mongoose.connect(`mongodb+srv://ismailkhandokar0:01995576173@cluster0.vn7sd.mongodb.net/<dbname>?retryWrites=true&w=majority`,{useNewUrlParser:true})
 .then(() =>{
     console.log(chalk.green(`Database Is Connected`))
     app.listen(PORT,() =>{
